@@ -9,24 +9,20 @@ namespace GreetingsXamarinTestApp
 {
     public class App : Application
     {
+        const string resultLabelText = "resultLabelTExt";
+
         public App()
         {
-            // The root page of your application
-            MainPage = new ContentPage
-            {
-                Content = new StackLayout
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children = {
-                        new Label {
-                            HorizontalTextAlignment = TextAlignment.Center,
-                            Text = "Welcome to Xamarin Forms!"
-                        }
-                    }
-                }
-            };
-        }
 
+            if(Properties.ContainsKey(resultLabelText))
+            {
+                ResultLabelText = (string)Properties[resultLabelText];
+            }
+
+            // The root page of your application
+            MainPage = new BasicCalculator();
+        }
+        public string ResultLabelText { get; set; }
         protected override void OnStart()
         {
             // Handle when your app starts
@@ -35,6 +31,7 @@ namespace GreetingsXamarinTestApp
         protected override void OnSleep()
         {
             // Handle when your app sleeps
+            Properties[resultLabelText] = ResultLabelText;
         }
 
         protected override void OnResume()
